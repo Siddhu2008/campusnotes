@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 
 import { AuthProvider } from '@/lib/context/AuthContext';
 import { ToastProvider } from '@/lib/context/ToastContext';
+import { DeploymentWatcher } from '@/components/DeploymentWatcher';
 
 export default function RootLayout({
   children,
@@ -36,6 +37,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
       <body className="antialiased">
+        <DeploymentWatcher />
         <ToastProvider>
           <AuthProvider>
             <Navbar />
