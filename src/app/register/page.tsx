@@ -6,7 +6,7 @@ import { BRANCHES, SEMESTERS } from '@/lib/data/mock';
 import { useAuth } from '@/lib/context/AuthContext';
 
 export default function RegisterPage() {
-  const { login } = useAuth();
+  const { register } = useAuth();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -34,7 +34,15 @@ export default function RegisterPage() {
     setError('');
     setLoading(true);
     await new Promise((r) => setTimeout(r, 800));
-    login(form.email);
+    register({
+      name: form.name,
+      email: form.email,
+      password: form.password,
+      branchId: form.branchId,
+      semesterId: form.semesterId,
+      year: Number(form.year) || 2,
+      role: /admin/i.test(form.email) ? 'admin' : 'student',
+    });
     setLoading(false);
     window.location.href = '/dashboard';
   };

@@ -14,21 +14,14 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     await new Promise((r) => setTimeout(r, 600));
-    login(form.email);
+    login(form.email, form.password);
     setLoading(false);
-    window.location.href = '/dashboard';
-  };
-
-  const handleDemoLogin = (email: string) => {
-    setForm({ email, password: 'demo_password_123' });
-    login(email);
     window.location.href = '/dashboard';
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center hero-bg grid-pattern pt-16 pb-safe px-4">
       <div className="w-full max-w-md animate-fade-in-up">
-        {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2.5 mb-6">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.5)]">
@@ -42,10 +35,8 @@ export default function LoginPage() {
           <p className="text-[var(--text-secondary)] text-sm">Sign in to access your resources</p>
         </div>
 
-        {/* Card */}
         <div className="glass-card rounded-3xl p-7">
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
                 Email Address
@@ -59,7 +50,7 @@ export default function LoginPage() {
                   type="email"
                   value={form.email}
                   onChange={(e) => setForm((v) => ({ ...v, email: e.target.value }))}
-                  placeholder="siddharth@tcet.ac.in"
+                  placeholder="student@tcet.ac.in"
                   className="input-field pl-10"
                   required
                   autoComplete="email"
@@ -67,7 +58,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
                 Password
@@ -96,14 +86,12 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Forgot password */}
             <div className="flex justify-end">
               <Link href="#" className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
                 Forgot password?
               </Link>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
@@ -123,31 +111,16 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Divider */}
-          <div className="flex items-center gap-3 my-5">
-            <div className="flex-1 h-px bg-white/10" />
-            <span className="text-xs text-[var(--text-muted)]">or quick sign-in with</span>
-            <div className="flex-1 h-px bg-white/10" />
-          </div>
-
-          {/* Quick Demo Logins */}
-          <div className="space-y-2">
-            <button
-              onClick={() => handleDemoLogin('siddharth@tcet.ac.in')}
-              className="btn-ghost w-full justify-center text-xs py-2.5 cursor-pointer"
+          <div className="mt-6 text-center">
+            <Link
+              href="/register"
+              className="text-xs text-indigo-300 hover:text-white transition-colors"
             >
-              🎓 Sign in as Siddharth (IT Student)
-            </button>
-            <button
-              onClick={() => handleDemoLogin('admin@tcet.ac.in')}
-              className="btn-ghost w-full justify-center text-xs py-2.5 text-purple-300 border-purple-500/30 hover:bg-purple-500/10 cursor-pointer"
-            >
-              🛡️ Sign in as Admin
-            </button>
+              Need a new account? Create one
+            </Link>
           </div>
         </div>
 
-        {/* Sign Up Link */}
         <p className="text-center text-sm text-[var(--text-muted)] mt-6">
           Don&apos;t have an account?{' '}
           <Link href="/register" className="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
